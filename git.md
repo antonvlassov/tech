@@ -1,9 +1,9 @@
 # Manter Repositórios
 
-## Novo Repo Padrao Arquitetura
+## Novo Repo 
 
 ```
-criar repo no GitLab (http://<repo>.git)
+criar repo no Git (http://<repo>.git)
 git init
 git remote add origin http://<repo>.git
 git add README.md
