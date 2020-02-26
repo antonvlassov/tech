@@ -1,3 +1,33 @@
+# Install Docker
+
+# prereq
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+# add repo
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable"
+
+sudo apt-get update
+
+# install docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+sudo usermod -aG docker $USER
+su - $USER
+
+
+# init docker
+sudo systemctl start docker
+(https://docs.docker.com/install/linux/linux-postinstall/#configure-docker-to-start-on-boot)
+ sudo systemctl stop docker
+
+# docker compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
 # Comandos Basicos
 
 ## Executar Imagem

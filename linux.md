@@ -126,6 +126,15 @@ chmod +x start_hadoop_services.sh
 ./start_hadoop_services.sh
 ```
 
+# permissoes
+`sudo usermod -aG docker $USER`  - adiciona usuario local ao docker
+
+`sudo chmod -R 777 microservices `- aplica permissoes recursivas para a pasta - todos os usuarios tem todas as permissoes
+
+`sudo chmod -R 775 microservices` - aplica permissoes recursivas para a pasta - usuarios e grupos tem as permissoes totais, usuarios de fora nao podem remover o arquivo - 775
+
+`sudo chown -R anton:anton microservices` - altera owner do arquivos para user:group especificado
+
 
 
 # Utilização com VM
