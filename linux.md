@@ -57,6 +57,16 @@ do
 done
 ```
 
+```
+#!/bin/bash
+for d in */ ;
+do
+   echo $d
+   (cd $d && git config core.filemode false)
+done
+```
+
+
 verificar capacidade da máquia
 
 `$ cat /proc/cpuinfo` <- cpu

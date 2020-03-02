@@ -15,11 +15,15 @@ minikube dashboard
 
 minikube addons enable metrics-server <-- precisa instalar o addon metrics-server para testes de auto-scaling no minikube
 
-# Microk8s - linux only
+# Microk8s
+
+## Install
 
 https://microk8s.io/docs/
 https://microk8s.io/docs/addons#list
 https://microk8s.io/docs/commandsmmm
+
+Para instalar (usando snaps) e seguir as atualizações da release 1.17 (nesse caso, não será realizado update automático para 1.18:)
 
 ```
 sudo apt install snapd
@@ -31,71 +35,89 @@ microk8s.enable dns dashboard ingress metrics-server storage
 microk8s.status
 ```
 
-`microk8s.disable dns`
+Caso seja necessário desabilitar algum addon (por exemplo, dns): `microk8s.disable dns`
 
-`
+Para parar ou iniciar microk8s
+```
 microk8s.stop
 microk8s.start
+```
 
-criar alias mkctl para microk8s.kubectl
+Sugestão: Em .zshrc criar alias mkctl para microk8s.kubectl
 
- mkctl cluster-info
-Kubernetes master is running at https://127.0.0.1:16443
-Heapster is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/heapster/proxy
-CoreDNS is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-Metrics-server is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
-Grafana is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
-InfluxDB is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-influxdb:http/proxy
+Exibir as informações do cluster:
 
-# acesso ao GRafana
-usuario e senha para acessar dashboards
-microk8s.config
-verificar no final do arquivo os campos username e password
-utilizar o proxy do comando abaixo
-https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy e usuario e senha obtido a partir do microk8s.config
+`microk8s.kubectl cluster-info`
+
+* Kubernetes master is running at https://127.0.0.1:16443
+* Heapster is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/heapster/proxy
+* CoreDNS is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+* Metrics-server is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+* Grafana is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
+* InfluxDB is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-influxdb:http/proxy
+
+## Validate Grafana
+Executar o comando `microk8s.config`
+
+Verificar no final do arquivo os campos username e password
 
     username: admin
     password: Q05iNG4zckRPN0QxY2RIN1FRN3Z3dE9BQjZZZC9WUVF3L1A0Nks2L2RwST0K
 
-# acesso ao Dashboards
-obter token de acesso ao Secret
+Utilizar o proxy do comando abaixo
+https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy e usuario e senha obtido a partir do microk8s.config    
 
-token=$(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
-microk8s.kubectl -n kube-system describe secret $token
-eyJhbGciOiJSUzI1NiIsImtpZCI6ImhvaUR2LWFlUVZxdm5Xemt6T2RiZHk0WUFNamdlMWZpVndhSU02X0JMRWsifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZWZhdWx0LXRva2VuLW40Y2J6Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRlZmF1bHQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI3YTMwM2FiMi0wNjFhLTRiNjUtODJjOS05NWZiMWZhZDM2NmEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06ZGVmYXVsdCJ9.SEN1pNfgFqSyLoRiJV7f8ajHecaP2K31bU5rPWrDq0SwqvHiZVFBnEv51D-xOo3AQfATvYr6tOKJDubXcAGrPF7g36-AayYJnuRLKwNgYUVsJhTCepwBi8fPpcdeIV1k-uw3d3-hDqNXT_Cjlu0XgA0GmzVstJtL8VQOQ_KcUhVBz7DOKg623I9A0Y4hBQSOuHvfbZ2i4vqoMRJC4Vb4hKMqE8y6cGFhn7bXPBtHFmviblZH7mwgZEFh5Sx_vY5_cBcfzKxWzEuE-PkR8pVWIKcG8a-YauZZKhyLO7ozfEZhhFstKb-pz5RWsfg70CSeJ9G2xvYqPnRlSrVvosSjxQ
+## Validate Kubernetes Dashboards
+A autenticação no Dashboard será realizada por meio do token armazenado no Secret sistêmico criado no ambiente
+
+Obter o nome secret:
+
+`token=$(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)`
+
+Obter o token:
+
+`microk8s.kubectl -n kube-system describe secret $token`
+
+O resultado será uma String como abaixo:
+`eyJhbGciOiJSUzI1NiIsImtpZCI6ImhvaUR2LWFlUVZxdm5Xemt6T2RiZHk0WUFNamdlMWZpVndhSU02X0JMRWsifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZWZhdWx0LXRva2VuLW40Y2J6Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRlZmF1bHQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI3YTMwM2FiMi0wNjFhLTRiNjUtODJjOS05NWZiMWZhZDM2NmEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06ZGVmYXVsdCJ9.SEN1pNfgFqSyLoRiJV7f8ajHecaP2K31bU5rPWrDq0SwqvHiZVFBnEv51D-xOo3AQfATvYr6tOKJDubXcAGrPF7g36-AayYJnuRLKwNgYUVsJhTCepwBi8fPpcdeIV1k-uw3d3-hDqNXT_Cjlu0XgA0GmzVstJtL8VQOQ_KcUhVBz7DOKg623I9A0Y4hBQSOuHvfbZ2i4vqoMRJC4Vb4hKMqE8y6cGFhn7bXPBtHFmviblZH7mwgZEFh5Sx_vY5_cBcfzKxWzEuE-PkR8pVWIKcG8a-YauZZKhyLO7ozfEZhhFstKb-pz5RWsfg70CSeJ9G2xvYqPnRlSrVvosSjxQ`
+
+Atenção: caso o Chrome impeça de prosseguir com acesso a página indicando problema com certificado, digitar  **UMA DAS **frases abaixo quando estiver na tela do Chrome: 
+
+_thisisunsafe_
+
+_badidea_
+
+## Validate Deployment
+Observação: mkctl é o alias criado para microk8s.kubectl.
 
 
-get svc --all-namespaces
-obter CLusterIP do 10.152.183.70 
-
-caso o chrome nao deixe perseguir por falta de certificado, digitar umas das frases abaixo na tela do Chrome
-thisisunsafe
-badidea
-
-# teste com pod
-
-
+```
 mkctl create deploy microbot --image=dontrebootme/microbot:v1
 mkctl scale deploy microbot --replicas=2
 mkctl expose deploy microbot --type=NodePort --port=80 --name=microbot-service
 mkctl get svc 
-- obter a porta associada ao Service - 32399
-acessar no localhost 
 
-http://anton-colab:32399/
-http://127.0.0.1:32399/
+```
+obter a porta associada ao Service (no caso 32399) e acessar localmente 
+
+* http://[machine name]:32399/
+* http://127.0.0.1:32399/
 
 
 # install Kubectl
+```
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 sudo apt update
 sudo apt install kubectl
 
+```
 # install Helm
+```
 sudo snap install helm --classic
+```
 
-# Basicos
+# Comandos Basicos
 https://kubernetes.io/docs/reference/kubectl/overview/
 
 Aplicação, consulta
