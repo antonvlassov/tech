@@ -10,6 +10,7 @@ sudo apt upgrade
 ```
 sudo apt install terminator
 sudo apt install git
+sudo apt install git-flow
 sudo apt install vlc
 sudo apt install curl
 sudo apt install wget
@@ -150,6 +151,16 @@ sudo apt install nodejs
 ## Kubernetes
 Para instalar **Helm, Kubectl e MicroK8S**, seguir as intruções em:
 https://github.com/antonvlassov/tech/blob/master/kubernetes.md
+
+
+## Ebook Reader
+Foliant - obter e instalar .deb do https://github.com/johnfactotum/foliate/releases
+
+## Screen Capture
+Nativo do Ubuntu
+PrtSc - screenshot do desktop
+Alt + PrtSc - da janela
+Shift + PrtSc - permite selecionar
 
 # Shell
 

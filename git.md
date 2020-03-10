@@ -41,11 +41,20 @@ git clone http://<<git>>.git
 git remote set-url origin http://<<git>>.git
 ```
 
+## Merge
+
+Realizar merge do "develop" para "master":
+1. realizar checkout do branch destino (master): `git checkout master` (ambos os branches de origem e destino devem estar presentes local)
+2. validar que o master esta sync com local: `git fetch / git merge / git status`
+3. realizar merge: git merge develop --squash. 
+    * `--squash` faz com que um único commit de merge seja criado, em vez de preservar a sequencia de commit inicial (isso é, merge nao faz commit no branch destino) 
+    * `--allow-unrelated-histories` corrige o erro de "refused to merge unrelated stories
+
 
 ## Utilidades
 `git reset --hard origin/master` - reverte para situação atual do master APAGANDO as alterações locais (sem recuperação)
 
-git remote -v - ver os remotes associados ao repositorio
+`git remote -v` - ver os remotes associados ao repositorio
 
 git config --list - ver as confiiguracoes aplicadas ao repositório
 
@@ -59,3 +68,81 @@ git rm -r --cached .
 git add .
 git commit -m ".gitignore is now working"
 ```
+
+
+# Git Flow
+
+git flow init  - inicializar git flow
+
+## Feature
+
+- criar nova feature:
+`git flow feature start new-feature` 
+
+- obter uma feature existente:
+`git flow feature pull new-feature`
+
+- comitar as alterações
+```
+git add .
+git commit –m ‘comentarios’
+```
+
+- publicar feature:
+`git flow feature publish new-feature`
+
+- finalizar feature:
+`git flow feature finish new-feature`
+
+- sync o develop:
+`git push origin develop`
+
+## Release
+- criar nova release:
+`git flow release publish new-release`
+
+- acompanhar release existente:
+`git flow release track my-new-release`
+
+- comitar as alterações (last minutes fixes)
+```
+git add .
+git commit –m ‘last-minute-release-bugfix’
+```
+- publicar release:
+`git flow release publish new-release`
+
+- finalizar release:
+`git flow release finish new-release`
+
+- sync repos
+```
+git push origin develop
+git checkout master
+git push origin master
+```
+## HotFix
+- criar hotfix:
+`git flow hotfix start emergency-hotfix`
+
+- comitar as alterações (hot-fixes)
+```
+git add .
+git commit –m ‘emergency-hotfix’
+```
+
+- publicar hotfix:
+`git flow hotfix publish emergency-hotfix`
+
+- finalizar hotfix:
+`git flow hotfix finish emergency-hotfix`
+
+- sync repos:
+```
+git push origin develop
+git checkout master
+git push origin maste
+
+```
+
+

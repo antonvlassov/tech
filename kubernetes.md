@@ -1,19 +1,33 @@
-# Minikube
-minikube start --vm-driver=virtualbox
-minikube ip
-minikube start --cpus 4 --memory 4096 --vm-driver=virtualbox
+# install Kubectl
+```
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt update
+sudo apt install kubectl
 
-minikube start --cpus 4 --memory 4096 --vm-driver=virtualbox --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.admission-control="NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,PodPreset,PodSecurityPolicy"
+```
+# install Helm
 
-minikube start -p <name> <-- nome do novo cluster - permite criara varios clusters minikube para propositos de teste
+Para inicalizar helm, arquivo de configuração deve estar presente no .kube
 
-minikube ssh
-loga no worker node (no caso do minukibe eh unico node)
-docker ps dentro do node lista os processos
+Version 2:
 
-minikube dashboard
+```
+sudo snap install helm --channel=2.16 --classic
+helm init
+```
 
-minikube addons enable metrics-server <-- precisa instalar o addon metrics-server para testes de auto-scaling no minikube
+Version 3: 
+```
+sudo snap install helm --classic
+```
+
+Dentro do microk8s (utiliza 2.16):
+microk8s.enable helm
+microk8s.helm init
+
+Obs.: criar alias
+
 
 # Microk8s
 
@@ -31,7 +45,7 @@ sudo snap install microk8s --classic --channel=1.17/stable
 sudo usermod -aG microk8s $USER
 su - $USER
 microk8s.status --wait-ready
-microk8s.enable dns dashboard ingress metrics-server storage
+microk8s.enable dns ingress storage helm
 microk8s.status
 ```
 
@@ -42,8 +56,17 @@ Para parar ou iniciar microk8s
 microk8s.stop
 microk8s.start
 ```
+microk8s possui seus próprios utilitários que correspondem ao kubectl e helm. Para utilizar, duas opções:
 
-Sugestão: Em .zshrc criar alias mkctl para microk8s.kubectl
+Em `.zshrc` criar alias para ter um shortcut
+```
+alias mkctl='microk8s.kubectl'
+alias mhelm='microk8s.helm'
+```
+Alternativa: exportar o config do microk8s para `.kube`, e utilizar kubectl e helm tradicionais:
+`microk8s.kubectl config view --raw > $HOME/.kube/config`
+(atenção renomear o config ja existente)
+
 
 Exibir as informações do cluster:
 
@@ -56,7 +79,9 @@ Exibir as informações do cluster:
 * Grafana is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
 * InfluxDB is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-influxdb:http/proxy
 
-## Validate Grafana
+## Validate Grafana (opcional)
+Habilitar Grafana `microk8s.enable metrics-server`
+
 Executar o comando `microk8s.config`
 
 Verificar no final do arquivo os campos username e password
@@ -67,7 +92,8 @@ Verificar no final do arquivo os campos username e password
 Utilizar o proxy do comando abaixo
 https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy e usuario e senha obtido a partir do microk8s.config    
 
-## Validate Kubernetes Dashboards
+## Validate Kubernetes Dashboards (opcional)
+Habilitar Dahsboard `microk8s.enable dashboard`
 A autenticação no Dashboard será realizada por meio do token armazenado no Secret sistêmico criado no ambiente
 
 Obter o nome secret:
@@ -88,14 +114,13 @@ _thisisunsafe_
 _badidea_
 
 ## Validate Deployment
-Observação: mkctl é o alias criado para microk8s.kubectl.
 
 
 ```
-mkctl create deploy microbot --image=dontrebootme/microbot:v1
-mkctl scale deploy microbot --replicas=2
-mkctl expose deploy microbot --type=NodePort --port=80 --name=microbot-service
-mkctl get svc 
+kubectl create deploy microbot --image=dontrebootme/microbot:v1
+kubectl scale deploy microbot --replicas=2
+kubectl expose deploy microbot --type=NodePort --port=80 --name=microbot-service
+kubectl get svc 
 
 ```
 obter a porta associada ao Service (no caso 32399) e acessar localmente 
@@ -104,18 +129,24 @@ obter a porta associada ao Service (no caso 32399) e acessar localmente
 * http://127.0.0.1:32399/
 
 
-# install Kubectl
+# Minikube
 ```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-sudo apt update
-sudo apt install kubectl
+minikube start --vm-driver=virtualbox
+minikube ip
+minikube start --cpus 4 --memory 4096 --vm-driver=virtualbox
+
+minikube start --cpus 4 --memory 4096 --vm-driver=virtualbox --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.admission-control="NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,PodPreset,PodSecurityPolicy"
 
 ```
-# install Helm
-```
-sudo snap install helm --classic
-```
+`minikube start -p <name> `<-- nome do novo cluster - permite criara varios clusters minikube para propositos de teste
+
+`minikube ssh`
+loga no worker node (no caso do minukibe eh unico node)
+docker ps dentro do node lista os processos
+
+`minikube dashboard`
+
+`minikube addons enable metrics-server` <-- precisa instalar o addon metrics-server para testes de auto-scaling no minikube
 
 # Comandos Basicos
 https://kubernetes.io/docs/reference/kubectl/overview/
@@ -206,7 +237,12 @@ kubectl logs fortune-configmap -c web-server <-- visualiza os logs do container 
 
 kubectl logs mypod --previous
 
+kubectl logs -f <pod_id> | grep <correlation_id> <-- permite fazer trail dos logs do pod e buscar um valor (ex. : correlation id detro deles)
+
+
 kubectl exec kubia-2r1qb -- touch /var/ready   <-- cria um arquivo vazio no Pod
+
+
 
 ```
 
