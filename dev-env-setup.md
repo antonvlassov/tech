@@ -27,17 +27,6 @@ ALT + F2, depois digitar "r" e "enter" para recarregar o ambiente desktop
 ## Confs Uteis
 ajuste de brilho - icone da bateria, ajustar
 
-# Configuração de VPN Spread
-
-1. Clicar em redes -> "Network settings"
-2. (+) - criar novo PPTP - point-to-point tunneling protocol
-4. Configurações: 
-      * _NAME_: VPN SPREAD
-      * _gateway_: vpn.spread.com.br / vpn2.spread.com.br
-6. abrir aba "advanced", em "authentication", deixar marcado somente "MSCHAP" e "MSCHAPv2". 
-7. Em "Security and Compression",  marcar **[x]** use point-to-point encryption **[mppe]**
-8. Security - selecionar 128 bits.
-9. Deixar o resto das configurações como defaut
 
 # Install & Configure Software
 
