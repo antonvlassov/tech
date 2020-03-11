@@ -56,17 +56,15 @@ Para parar ou iniciar microk8s
 microk8s.stop
 microk8s.start
 ```
-microk8s possui seus próprios utilitários que correspondem ao kubectl e helm. Para utilizar, duas opções:
+microk8s possui seus próprios utilitários que correspondem ao **kubectl** (`microk8s.kubectl`) e **helm **(`microk8s.helm`). 
 
-Em `.zshrc` criar alias para ter um shortcut
+Como alternativa, em `.zshrc` criar alias para ter um shortcut
 ```
 alias mkctl='microk8s.kubectl'
 alias mhelm='microk8s.helm'
 ```
-Alternativa: exportar o config do microk8s para `.kube`, e utilizar kubectl e helm tradicionais:
+ou exportar o config do microk8s para `.kube`, e utilizar kubectl e helm tradicionais:
 `microk8s.kubectl config view --raw > $HOME/.kube/config`
-(atenção renomear o config ja existente)
-
 
 Exibir as informações do cluster:
 
