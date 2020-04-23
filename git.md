@@ -6,9 +6,11 @@
 criar repo no Git (http://<repo>.git)
 git init
 git remote add origin http://<repo>.git
+
 git add README.md
 git commit -m 'create repo - init commit'
 git push origin master  (solicitado login e senha)
+git push --set-upstream origin master (em alguns casos)
 git branch develop
 git checkout develop
 git add .
