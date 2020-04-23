@@ -126,6 +126,9 @@ procurar e instalar:
 2. project -> properties -> java build path -> alterar de /bin para /target
 3. project -> maven -> update project -> [x] update dependencies -> [x] force update of snapshots/releases
 
+## Instalar Maven
+`sudo apt install maven`
+
 
 ## Node JS
 

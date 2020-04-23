@@ -126,6 +126,16 @@ obter a porta associada ao Service (no caso 32399) e acessar localmente
 * http://[machine name]:32399/
 * http://127.0.0.1:32399/
 
+## Gerenciar o microk8s
+Executar comando `microk8s.ctr -help` para obter o menu de comandos do controle.
+
+Por exemplo
+`microk8s.ctr images ls | grep kafka` - lista todas as imagens docker em cache referentes a Kafka
+`microk8s.ctr images -h` - exibe help para um subcomando
+
+## Remover Microk8s
+
+
 
 # Minikube
 ```
