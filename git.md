@@ -24,8 +24,9 @@ git push origin develop
 git config --global user.email "anton.vlassov.@email.com"
 git config --global user.name "Anton Vlassov"
 git config --global credential.helper store 
-git config --global credential.github.com.useHttpPath true
+git config --global credential.https://github.com.useHttpPath true
 git config --global core.filemode false
+git config --global core.editor "vim"
 ```
 Verificar as credenciais salvas:
 `vim ~/.git-credentials`
@@ -43,14 +44,26 @@ git clone http://<<git>>.git
 git remote set-url origin http://<<git>>.git
 ```
 
+## Compare
+`git diff branch1..branch2` - compara o HEAD dos dois branches
+`git log branch1..branch2` - compara hist de commit entre dois branches
+
 ## Merge
 
-Realizar merge do "develop" para "master":
+Realizar merge controlado das últimos updates do remote para local
+```
+git status
+git fetch 
+git merge
+git status
+```
+
+Realizar merge do **"develop"** para **"master"**:
 1. realizar checkout do branch destino (master): `git checkout master` (ambos os branches de origem e destino devem estar presentes local)
 2. validar que o master esta sync com local: `git fetch / git merge / git status`
-3. realizar merge: git merge develop --squash. 
+3. realizar merge: `git merge develop --squash`. 
     * `--squash` faz com que um único commit de merge seja criado, em vez de preservar a sequencia de commit inicial (isso é, merge nao faz commit no branch destino) 
-    * `--allow-unrelated-histories` corrige o erro de "refused to merge unrelated stories
+    * `--allow-unrelated-histories` corrige o erro de "refused to merge unrelated stories"
 
 
 ## Utilidades
@@ -58,7 +71,9 @@ Realizar merge do "develop" para "master":
 
 `git remote -v` - ver os remotes associados ao repositorio
 
-git config --list - ver as confiiguracoes aplicadas ao repositório
+`git config --list` - ver as confiiguracoes aplicadas ao repositório
+
+`git branch -a` - lista branches locais e remotos
 
 ## atualizar .gitignote  
 ### metodo radical - full cleanup commit
@@ -74,7 +89,7 @@ git commit -m ".gitignore is now working"
 
 # Git Flow
 
-git flow init  - inicializar git flow
+`git flow init`  - inicializar git flow
 
 ## Feature
 
