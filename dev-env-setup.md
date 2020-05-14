@@ -53,6 +53,20 @@ code --install-extension redhat.vscode-yaml
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension codezombiech.gitignore
 code --install-extension mdickin.markdown-shortcuts
+code --install-extension juanblanco.solidity
+code --install-extension tintinweb.solidity-visual-auditor
+```
+Aumentar o máximo possível de arquivos do file watch para grandes projetos node (muitos node_modules) em workspaces
+
+
+editar o conf e adicionar novo valor no final do arquivo:
+```
+sudo vim /etc/sysctl.conf
+fs.inotify.max_user_watches = 524288
+```
+confirmar novo valor setado
+```
+cat /proc/sys/fs/inotify/max_user_watches
 ```
 
 ## SDK Man
@@ -136,8 +150,27 @@ procurar e instalar:
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
 sudo apt install nodejs 
 ```
+Preparar npm para global module install, sem a necessidade de SUDO
+```
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
 
+```
+Adicionar PATH no .zshrc e recarregar o profile
+```
+export PATH=~/.npm-global/bin:$PATH
 
+```
+
+instalar instalador simples de node versions, para nao depender do repo do Ubunto e poder especificar versão apropriada
+
+```
+sudo npm install n -g
+sudo -E env "PATH=$PATH" n 12.12.0
+
+```
+usar para a a necessidade de instalar a ultima stable:
+`sudo -E env "PATH=$PATH" n stable`
 
 
 ## Kubernetes
@@ -206,6 +239,29 @@ Abrir o arquivo de configuração do shell: `vim .zshrc`
 ```
 6. Adicionar alias e functions customs (ver Referencia)
 7. Realizar customização avançada se necessário por meio de  https://github.com/Powerlevel9k/powerlevel9k
+8. Criar comandos utilitários
+
+```
+alias zcfg="source ~/.zshrc"
+
+function kubecfg() {
+  if [ -z $1 ]
+  then
+     kubectl config current-context
+  else	
+     cp $HOME/.kube/config_$1 $HOME/.kube/config 
+     kubectl config current-context
+  fi	
+}
+
+
+alias mkctl='microk8s.kubectl'
+alias mhelm='microk8s.helm'
+alias mstart='microk8s.start'
+alias mstop='microk8s.stop'
+alias mstatus='microk8s.status'
+```
+
 
 # Terminal
 
@@ -225,6 +281,9 @@ A seguir,
 1.  desmarcar _[ ] use the system fixed_
 2.  selecionar a fonte.  "Roboto Mono for PowerLine Regular"
 2. setar tamanho para 11
+
+
+'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'
 
 ## Themes
 instalar o tema do iTerm:
@@ -292,7 +351,7 @@ function gacp() {
 * https://www.sitepoint.com/zsh-tips-tricks/
 * https://medium.com/@ferhatsukrurende/terminator-zsh-ohmyzsh-58ba4303bd09
 * https://deepu.tech/make-the-most-out-of-vscode/
-https://github.com/Powerlevel9k/powerlevel9k/wiki/Show-Off-Your-Config
+* https://github.com/Powerlevel9k/powerlevel9k/wiki/Show-Off-Your-Config
 
 
 
