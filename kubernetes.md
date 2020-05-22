@@ -133,6 +133,20 @@ Por exemplo
 `microk8s.ctr images ls | grep kafka` - lista todas as imagens docker em cache referentes a Kafka
 `microk8s.ctr images -h` - exibe help para um subcomando
 
+Pasta com Logs dos Pods (precisa de sudo): `/var/log/pods/`
+
+Configurações: `/var/snap/microk8s/current`  (ver pasta `/args` para configs de cada snap service)
+
+Installation: `/snap/microk8s/current`
+
+## Microk8s Internal Registry
+
+https://microk8s.io/docs/registry-images
+https://microk8s.io/docs/registry-built-in
+https://itnext.io/microk8s-docker-registry-c3f401faa760
+
+
+
 ## Remover Microk8s
 
 
@@ -208,6 +222,8 @@ kubectl port-forward fortune 8080:80 <-- permite expor um Pod via portforwarding
 kubectl port-forward svc/my-release-postgresql 5432:5432  <-- port forward para um Service em vez do Pod    
 
 kubectl expose deployment kubia-deployment --type=LoadBalancer --name=kubia-lb <-- cria um Service do tipo LoadBalance para Deployment
+
+kubectl expose deployment service-name-deployment --type=NodePort --name=service-name-nodeport --port=8081
 
 
 
