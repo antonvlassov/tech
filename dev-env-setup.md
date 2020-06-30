@@ -187,6 +187,17 @@ PrtSc - screenshot do desktop
 Alt + PrtSc - da janela
 Shift + PrtSc - permite selecionar
 
+## Multimidia
+```
+sudo apt install ffmpeg
+
+sudo add-apt-repository ppa:clipgrab-team/ppa
+sudo apt-get update
+sudo apt-get install clipgrab
+
+sudo apt install openshot
+
+```
 # Shell
 
 ## Configs 
@@ -261,7 +272,6 @@ alias mstart='microk8s.start'
 alias mstop='microk8s.stop'
 alias mstatus='microk8s.status'
 ```
-
 
 # Terminal
 
