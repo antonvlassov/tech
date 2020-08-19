@@ -149,8 +149,49 @@ https://itnext.io/microk8s-docker-registry-c3f401faa760
 
 ## Remover Microk8s
 
+# Istio
+
+Instalação de Demo Profile no Microk8s ou Minikube
+
+## Install IstioCtl
+```
+cd software
+curl -L https://istio.io/downloadIstio | sh -
+
+```
+Adicionar o **istioctl** no path do `.zshrc`, adicionando a linha
+`export PATH="$PATH:/home/anton/software/istio-1.6.7/bin" `
+
+## Install Istio
+Apontar `.kube` para o cluster onde deverá ser feita instalação:
+
+1. Criar namespace **istio-system**: `kubectl apply -f 1-istio-system-namespace.yaml`
+1. Aplicar demo profile: `istioctl manifest apply --set profile=demo --set values.global.jwtPolicy=first-party-jwt`
+1. Expor Services de UI como NodePort: `kubectl apply -f 3-istio-ui-services.yaml`
+
+## Validar Instalação:
+kubectl get all -n istio-system
+
+Acessar os services (conforme node-ports configurados)
+* **kiali:** anton-colab:31000  (admin/ admin) 
+* **jaeger:** anton-colab:31001  
+* **grafana:** anton-colab:31002
 
 
+# Harbor
+Harbor custom repository, acesso pelo https (supondo instalado em jttps://harbor.host.com.br)
+
+```
+ex +'/BEGIN CERTIFICATE/,/END CERTIFICATE/p' <(echo | openssl s_client -showcerts -connect harbor.host.com.br:443) -scq > harbor.crt
+sudo -i
+sudo mkdir /usr/share/ca-certificates/harbor
+sudo cp harbor.crt /usr/share/ca-certificates/harbor/harbor.crt
+sudo dpkg-reconfigure ca-certificates
+-- na tela selecionar o certificado harbor.crt adicionado previamente
+sudo update-ca-certificates
+sudo service docker restart ou sudo systemctl restart docker.service
+
+```
 # Minikube
 ```
 minikube start --vm-driver=virtualbox
@@ -265,6 +306,17 @@ kubectl logs -f <pod_id> | grep <correlation_id> <-- permite fazer trail dos log
 
 
 kubectl exec kubia-2r1qb -- touch /var/ready   <-- cria um arquivo vazio no Pod
+
+obter nome do pod que acabou de subir:
+kubectl get pod -l app=microbot -o jsonpath='{.items[0].metadata.name}'
+
+obter a lista dos nomes dos Pods em deployment:
+kubectl get pod -l app=microbot -o jsonpath='{.items..metadata.name}' 
+
+acompanhar o log do Pod (primeiro das replicas)
+kubectl logs -f $(kubectl get pod -l app=microbot -o jsonpath='{.items[0].metadata.name}') -c microbot 
+
+
 
 
 

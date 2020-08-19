@@ -86,6 +86,16 @@ git add .
 git commit -m ".gitignore is now working"
 ```
 
+## Criar um Branch Histórico a partir do Master
+```
+git checkout master
+git pull (realizar merge)
+git branch historic-1-2-0
+git checkout historic-1-2-0
+git merge master --squash
+git push --set-upstream origin historic-1-2-0
+
+```
 
 # Git Flow
 
@@ -116,7 +126,7 @@ git commit –m ‘comentarios’
 
 ## Release
 - criar nova release:
-`git flow release publish new-release`
+`git flow release start new-release`
 
 - acompanhar release existente:
 `git flow release track my-new-release`

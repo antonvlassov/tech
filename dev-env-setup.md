@@ -72,24 +72,38 @@ cat /proc/sys/fs/inotify/max_user_watches
 ## SDK Man
 curl -s "https://get.sdkman.io" | bash
 source "/home/anton/.sdkman/bin/sdkman-init.sh"
-```
+
 Os SDK gerenciados pelo SdkMan sao instalados nesse folder
 `/home/anton/.sdkman`
 
 Adicionar seguinte linha ao final do `.zshrc`:
-```
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/anton/.sdkman"
-[[ -s "/home/anton/.sdkman/bin/sdkman-init.sh" ]] && source "/home/anton/.sdkman/bin/sdkman-init.sh"
-```
+
+**#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!**
+
+`export SDKMAN_DIR="/home/anton/.sdkman" [[ -s "/home/anton/.sdkman/bin/sdkman-init.sh" ]] && source "/home/anton/.sdkman/bin/sdkman-init.sh"`
+
 Instalar JDK8 open source (AdoptJDK):
 `sdk install java 8.0.242.hs-adpt `
 
 Observação: Java Default é instalado em:
 `ls /usr/lib/jvm `. Esse path pode ser encontrado por meio do comando `readlink -f $(which java)`
 
+Listar versões:
+`sdk list java`
 
-```
+Instalar versões - obter o campo "identifier" da listagem:
+`sdk install java <<identifier>>`
+
+Verificar qual versão é defalt (SDK já configura o JAVA_HOME):
+`sdk current java`
+
+Configurar como default:
+`sdk default java <<identifier>>`
+
+User versão específica
+`sdk use java <<identifier>>`
+
+
 ## Spring Tool Suite
 baixar binários do https://spring.io/tools
 
