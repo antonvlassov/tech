@@ -45,17 +45,9 @@ Baixar os binários de https://code.visualstudio.com/docs/?dv=linux64_deb
 cd ~/Downloads/
 sudo dpkg -i code_1.42.1-1581432938_amd64.deb
 ```
-instalar as extensões recomendadas:
-```
-code --install-extension redhat.java
-code --install-extension secanis.jenkinsfile-support
-code --install-extension redhat.vscode-yaml
-code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-code --install-extension codezombiech.gitignore
-code --install-extension mdickin.markdown-shortcuts
-code --install-extension juanblanco.solidity
-code --install-extension tintinweb.solidity-visual-auditor
-```
+
+Configurar 
+
 Aumentar o máximo possível de arquivos do file watch para grandes projetos node (muitos node_modules) em workspaces
 
 
@@ -377,13 +369,7 @@ function gacp() {
 * https://deepu.tech/make-the-most-out-of-vscode/
 * https://github.com/Powerlevel9k/powerlevel9k/wiki/Show-Off-Your-Config
 
-
-
-Hyprledger
-=================
-https://www.uniwebb.com/blog/post/how-to-install-hyperledger-fabric-14-on-ubuntu-1804-lts/1766/
-
-Vim
+# Vim
 ============
 https://medium.com/free-code-camp/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae
 

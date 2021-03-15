@@ -48,6 +48,12 @@ git remote set-url origin http://<<git>>.git
 `git diff branch1..branch2` - compara o HEAD dos dois branches
 `git log branch1..branch2` - compara hist de commit entre dois branches
 
+compara branch local com o mesmo branch remoto (repo)
+```
+git fetch
+git diff master origin/master
+
+```
 ## Merge
 
 Realizar merge controlado das últimos updates do remote para local
@@ -96,6 +102,19 @@ git merge master --squash
 git push --set-upstream origin historic-1-2-0
 
 ```
+
+# Geral
+
+## Correção de Problemas de Certificado
+# Correção de Problemas de Certificado
+
+Erro: fatal: unable to access 'https://github.com/hyperledger/fabric-chaincode-go/': server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
+
+openssl s_client -showcerts -servername github.com -connect github.com:443 </dev/null 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
+cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+
+openssl s_client -showcerts -servername google.golang.org -connect google.golang.org:443 </dev/null 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > google-golang-org.pem
+cat google-golang-org.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
 
 # Git Flow
 

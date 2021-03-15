@@ -145,7 +145,10 @@ chmod +x start_hadoop_services.sh
 
 `sudo chown -R anton:anton microservices` - altera owner do arquivos para user:group especificado
 
+# env var
+unset [var name]
 
+`source ./script.sh` ou `. ./script.sh` - variaveis de ambiente EXPORT dentro do shell serão preservadas após a execução do script
 
 # Utilização com VM
 
@@ -207,6 +210,11 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 
 ```
+
+# File Structure
+
+
+
 
 
 

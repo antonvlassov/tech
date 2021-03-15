@@ -71,6 +71,10 @@ docker run -it busybox sh -novo container da iagem busybox iniciando com 'sh' co
 
 ID do conatainer - pode ser referenciado pegando qualquer quantidade dos primeiros caracteres desde que sejam únicos
 
+docker stop $(docker ps -a -q) - parar todos os containers
+
+docker rm $(docker ps -a -q) - remover todos os containers
+
 CONTAINER ID e IMAGE ID são diferentes
 
 
