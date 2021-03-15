@@ -46,7 +46,7 @@ cd ~/Downloads/
 sudo dpkg -i code_1.42.1-1581432938_amd64.deb
 ```
 
-Configurar 
+Configurar o VScode de acordo com https://github.com/antonvlassov/tech/blob/master/vscode.md
 
 Aumentar o máximo possível de arquivos do file watch para grandes projetos node (muitos node_modules) em workspaces
 

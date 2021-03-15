@@ -173,9 +173,9 @@ Apontar `.kube` para o cluster onde deverá ser feita instalação:
 kubectl get all -n istio-system
 
 Acessar os services (conforme node-ports configurados)
-* **kiali:** anton-colab:31000  (admin/ admin) 
-* **jaeger:** anton-colab:31001  
-* **grafana:** anton-colab:31002
+* **kiali:** anton-notebook:31000  (admin/ admin) 
+* **jaeger:** anton-notebook:31001  
+* **grafana:** anton-notebook:31002
 
 
 # Harbor
