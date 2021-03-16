@@ -239,7 +239,7 @@ Abrir o arquivo de configuração do shell: `vim .zshrc`
 1. Copiar o `$PATH` do `.bashrc` atual
 2. Configurar o tema: `ZSH_THEME=agnoster`
 3. Configurar seguintes plugins:
-  ```
+```
   plugins=(
     git
     git-flow
