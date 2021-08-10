@@ -34,7 +34,10 @@ Algumas outras configurações comuns
 * `files > exclude` - quais arquivos não mostrar dentro do editor (hidden)
 * `cursor` - definir formato de blinking, tipo, etc
 
+Fonte Powerline9k para deixar o terminal do VSCode semelhante ao do Terminator/OhMyZsh/Agnostic Theme:
 
+1. Acessar "Setting", Terminal > Integrated:Font Family
+2. Adicionar: `Roboto Mono for Powerline`
 
 # Terminal
 Font Family, Font Size, etc, cursor, etc

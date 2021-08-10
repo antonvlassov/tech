@@ -324,7 +324,9 @@ e adcionar o contéudo dos temas como configs para profile default
 * _ctrl+shift+ip/down_ - resize windows
 * _ctrl+shift+x_ - zoom into window
 * _ctrl+d / ctrl+w_- close
-* _ctrl+r_ - search no historico de comandos
+* _ctrl+r_ - search no historico de comandos, digitar uma parte do comando e a cada ctrl+l vai mostrar outas entradas no histórico corresponte ao search
+* _ctrl+s_ - fwd-i-search
+
 
 # Referência
 
