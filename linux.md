@@ -211,15 +211,40 @@ docker-compose --version
 
 ```
 
-# File Structure
+# Limpar File System
+
+Remove packages desnecessários
+sudo apt-get autoclean
+
+Remove todo o cache do apt (pode ser consultado sudo du -sh /var/cache/apt )
+sudo apt-get clean
+
+Rmeove Kernel antigos
+sudo apt-get autoremove
+sudo apt-get autoremove --purge
+
+Remove Logs de Errro (tamanho dos logs pode ser consultado em journalctl --disk-usage)
+sudo journalctl --vacuum-time=3d
+
+Cache de versões antigas do Snap (consultar em du -h /var/lib/snapd/snaps)
+Executar o script abaixo com sudo:
+
+```
+#!/bin/bash
+# Removes old revisions of snaps
+# CLOSE ALL SNAPS BEFORE RUNNING THIS
+set -eu
+snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
+```
+
+Limpar cache de icones (consultar em du -sh ~/.cache/thumbnails)
+rm -rf ~/.cache/thumbnails/*
 
 
-
-
-
-
-
-
-
+Limpar imagens e outros artefatos docker
+https://docs.docker.com/config/pruning/
 
 
