@@ -212,6 +212,9 @@ docker-compose --version
 ```
 
 # Limpar File System
+Comandos úteis para consultar espaço:
+sudo du -s -h -x /*
+sudo du -d 1 -h / | sort -h
 
 Remove packages desnecessários
 sudo apt-get autoclean
@@ -225,6 +228,20 @@ sudo apt-get autoremove --purge
 
 Remove Logs de Errro (tamanho dos logs pode ser consultado em journalctl --disk-usage)
 sudo journalctl --vacuum-time=3d
+sudo journalctl --vacuum-size=50M
+
+Configuração Minima do log sistemico:
+sudo sed -i 's/#SystemMaxFiles=100/SystemMaxFiles=7/g' /etc/systemd/journald.conf
+sudo rm -v /var/log/*.log* /var/log/syslog*
+sudo sed -i 's/rotate 7/rotate 1/g' /etc/logrotate.d/rsyslog
+sudo sed -i 's/rotate 4/rotate 1/g' /etc/logrotate.d/rsyslog
+sudo sed -i 's/weekly/daily/g' /etc/logrotate.d/rsyslog
+sudo sed -i 's/rotate 4/rotate 1/g' /etc/logrotate.conf
+sudo sed -i 's/weekly/daily/g' /etc/logrotate.conf
+
+Desligar log do firewall
+sudo ufw logging off
+(se preisar ligar de volta:sudo ufw logging low)
 
 Cache de versões antigas do Snap (consultar em du -h /var/lib/snapd/snaps)
 Executar o script abaixo com sudo:
@@ -243,8 +260,32 @@ snap list --all | awk '/disabled/{print $1, $3}' |
 Limpar cache de icones (consultar em du -sh ~/.cache/thumbnails)
 rm -rf ~/.cache/thumbnails/*
 
+sudo du -sh /var/cache/apt 
+
+Remover fontes asiaticas
+sudo apt-get remove "fonts-kacst*" "fonts-khmeros*" fonts-lklug-sinhala fonts-guru-extra "fonts-nanum*" fonts-noto-cjk "fonts-takao*" fonts-tibetan-machine fonts-lao fonts-sil-padauk fonts-sil-abyssinica "fonts-tlwg-*" "fonts-lohit-*" fonts-beng-extra fonts-gargi fonts-gubbi fonts-gujr-extra fonts-kalapi "fonts-samyak*" fonts-navilu fonts-nakula fonts-orya-extra fonts-pagul fonts-sarai "fonts-telu*" "fonts-wqy*" "fonts-smc*" fonts-deva-extra fonts-sahadeva
+sudo dpkg-reconfigure fontconfig
+
+Remover settings so Mozilla
+cp -r -v ~/.mozilla ~/.mozillabackup
+rm -r -v ~/.mozilla && rm -r -v ~/.cache/mozilla
+
+Remover settings do Chrome
+cp -r -v ~/.config/google-chrome ~/.config/google-chromebackup
+rm -r -v ~/.config/google-chrome && rm -r -v ~/.cache/google-chrome
 
 Limpar imagens e outros artefatos docker
 https://docs.docker.com/config/pruning/
+
+Timeshift
+- configurar 1 boot snapshot e 1 montlhy snapshots com periodicidade mensal
+- excluir nos Setting => filters nas pastaas /mnt e /media
+
+Flatpak
+- remover os flatpacks instalados por meio de 'Software Manager"
+- remover a infra (sudo apt-get purge "*flatpak*")
+
+Referências:
+https://easylinuxtipsproject.blogspot.com/p/clean-mint.html#ID7
 
 
