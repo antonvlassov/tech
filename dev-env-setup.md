@@ -1,3 +1,18 @@
+# Windows Dual Boot
+
+Seguir as instruções em:
+https://fossinsider.com/dual-boot-linux-mint-and-windows11/
+
+**Dicas:**
+
+1. F1 (BIOS) - em Security, desabilitar Secure Boot para que possa bootar do USB os sistemas operacionais não homologados (não-Microsoft). Nunca mais reabilitar.
+2. F12 - permite entrar em one-time boot selection mode (isso é, só usa a opção naquele boot) e selecionar boot do USB
+
+Calcular o espaço em disco - do espaço total disponível para Linux, subtrair 1024 MB para Boot Partition, 2 x RAM GB para Swap. Restante dividir em duas partições (`/` e `/home`).
+
+Assim que executar o Linux do USB, **antes de instalar a versão**, verificar o funcionamento de todos os drivers relevantes, principalmente WIFI, Ethernet e outros periféricos. Se não funcionar na imagem, não vai funcionar após a instalação final. Resolver todos os problemas na imagem
+
+
 # Linux Mint
 
 ## Upgrade
