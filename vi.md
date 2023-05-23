@@ -1,3 +1,5 @@
+# Basico
+
 i - insert mode
 
 [esc] - command mode
@@ -16,3 +18,7 @@ Copy and paste is performed with the same steps except for step 4 where you woul
 d = delete = cut
 
 y = yank = copy
+
+
+# Referencia
+https://medium.com/free-code-camp/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae

@@ -20,6 +20,9 @@ git push origin develop
 ```
 
 # Configurar o git
+
+## Global Confs
+
 ```
 git config --global user.email "anton.vlassov.@email.com"
 git config --global user.name "Anton Vlassov"
@@ -30,6 +33,38 @@ git config --global core.editor "vim"
 ```
 Verificar as credenciais salvas:
 `vim ~/.git-credentials`
+
+Listas as confs:
+`git config --list`
+
+
+## Chave SSH
+
+Fazer para install novo ou gerado
+
+`ssh-keygen -t rsa -b 4096 -C "anton.vlassov.@email.com"`
+
+Chaves serão geradas em:
+
+```
+Your identification has been saved in /home/anton/.ssh/id_rsa
+Your public key has been saved in /home/anton/.ssh/id_rsa.pub
+
+```
+`ssh-add ~/.ssh/id_rsa`
+
+Importar chave pública na conta do github:
+
+`cat ~/.ssh/id_rsa.pub`
+
+Navegar em Profile => Settings => SSH and GPG Keys => SSH Keys => Add New
+
+Testar:
+
+`ssh -T git@github.com`
+
+Deve receber mensagem: _You've successfully authenticated, but GitHub does not provide shell access._
+
 
 ## Associar ao repo existente
 

@@ -1,4 +1,23 @@
-# Principais Comandos
+# Softwares
+
+## Install
+```
+sudo apt install ffmpeg
+
+sudo add-apt-repository ppa:clipgrab-team/ppa
+sudo apt-get update
+sudo apt-get install clipgrab
+
+sudo apt install openshot
+
+```
+
+## Repositorios
+
+Kazam - Software Manager => System Package
+
+
+# FFMPEG - Principais Comandos
 
 ## Editar Video
 

@@ -54,6 +54,21 @@ cd ~/Downloads/
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ```
+
+Criar 3 profiles - principais, Web3 (Com todas as Wallets) e Dev (Com Wallets apontando para redes de testes  )
+
+## Brave Browser
+
+```
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+sudo apt update
+
+sudo apt install brave-browser
+
+```
 ## Visual Studio Code
 Baixar os binários de https://code.visualstudio.com/docs/?dv=linux64_deb
 ```
@@ -208,23 +223,19 @@ PrtSc - screenshot do desktop
 Alt + PrtSc - da janela
 Shift + PrtSc - permite selecionar
 
-## Multimidia
-```
-sudo apt install ffmpeg
 
-sudo add-apt-repository ppa:clipgrab-team/ppa
-sudo apt-get update
-sudo apt-get install clipgrab
-
-sudo apt install openshot
-
-```
 # Shell
 
 ## Configs 
 
-Configurar  ZSH como default shell 
+Configurar  ZSH como default shell :
 
+```
+zsh --version
+whereis zsh
+sudo usermod -s /usr/bin/zsh $(whoami)
+
+```
 Tornar o autocomplete case-insenstive
 ```
 $ if [ ! -a ~/.inputrc ]; then echo '$include /etc/inputrc' > ~/.inputrc; fi
@@ -243,9 +254,27 @@ sh -c “$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/m
 * Localização dos plugins na máquina local: `cd ~/.oh-my-zsh/plugins`
 * Lista de plugins disponíveis: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 
-Instalar plugins adicionais, seguindo install instructions para cada plugin:
-* zsh-autosuggestions
-* zsh-syntax-highlighting
+## Instalar plugins adicionais:
+
+```
+sudo apt install zsh-theme-powerlevel9k
+sudo apt install zsh-syntax-highlighting
+sudo apt install zsh-autosuggestions
+
+```
+Adicionar conf para habilitar dentro do zsh
+```
+echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+echo "source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+
+```
+## Configurar Prompt
+
+Prompt do powerlevel:
+
+https://github.com/Powerlevel9k/powerlevel9k/wiki/Stylizing-Your-Prompt
+https://github.com/Powerlevel9k/powerlevel9k#context
 
 
 ## Configurar ZSH / OhMyZSH
@@ -345,6 +374,10 @@ e adcionar o contéudo dos temas como configs para profile default
 
 # Referência
 
+## Sobre Privacidade
+https://ssd.eff.org/
+https://www.privacytools.io/
+
 ## alias e functions uteis em .zshrc
 
 ```
@@ -385,10 +418,9 @@ function gacp() {
 * https://medium.com/@ferhatsukrurende/terminator-zsh-ohmyzsh-58ba4303bd09
 * https://deepu.tech/make-the-most-out-of-vscode/
 * https://github.com/Powerlevel9k/powerlevel9k/wiki/Show-Off-Your-Config
+* https://medium.com/@gutoinfo.ribeiro/instalando-e-configurando-o-zsh-no-ubuntu-20-04-4ef8a2499ed5
+* https://brunopaz.dev/blog/my-linux-development-envrionment-2018/  
 
-# Vim
-============
-https://medium.com/free-code-camp/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae
 
 
 
