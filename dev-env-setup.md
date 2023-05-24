@@ -405,7 +405,32 @@ function gacp() {
 }
 ```
 
+# Security & Privacy
 
+## Browser Extension
+
+Ad-Blocker: https://ublockorigin.com/
+
+## Password Manager
+
+https://bitwarden.com/download/ 
+
+Configurar a conta
+
+## VeraCrypt
+
+https://www.veracrypt.fr/en/Downloads.html
+
+Fazer downloas do .deb correspondente a versão
+
+Seguir tutorial: https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html
+
+Usado 256 MB com Ext4 (para Linux somente)
+
+## Proton VPN
+
+https://protonvpn.com/support/linux-vpn-setup/#linux_app
+https://protonvpn.com/support/official-linux-vpn-mint/
 
 ## Links com artigos utilizados
 
