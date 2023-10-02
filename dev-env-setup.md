@@ -39,6 +39,13 @@ sudo apt install snapd
 Para bugs e travamentos do Cinnamon:
 ALT + F2, depois digitar "r" e "enter" para recarregar o ambiente desktop 
 
+## Short Cuts
+
+Keyboard => system
+
+ctrl+shift+l - lock
+ctrl+shift+del - suspend
+
 ## Confs Uteis
 ajuste de brilho - icone da bateria, ajustar
 

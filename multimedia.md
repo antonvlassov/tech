@@ -4,15 +4,28 @@
 ```
 sudo apt install ffmpeg
 
-sudo add-apt-repository ppa:clipgrab-team/ppa
-sudo apt-get update
-sudo apt-get install clipgrab
-
 sudo apt install openshot
 
 ```
 
-## Repositorios
+
+# Studio
+
+## Hydrogen Drum Machine
+https://repology.org/project/hydrogen-drum-machine/versions
+
+sudo apt install hydrogen 
+
+whereis pulseaudio
+sudo apt install pavucontrol
+
+sudo apt install qjackctl
+
+cat /etc/security/limits.d/audio.conf
+
+
+
+# Screencast / Podcast
 
 Kazam - Software Manager => System Package
 

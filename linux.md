@@ -17,6 +17,9 @@
 
 `$ sudo -i` => muda para usuario root
 
+`inxi -Fxxxrz` => config do sistema para troubleshooting
+ 
+
 grep
 
 `$ grep --include=\*.props -rnw '/opt/middleware/OAG-11.1.2.4.0/apigateway' -e "env."`
