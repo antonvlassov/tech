@@ -21,6 +21,68 @@ git push origin develop
 
 # Configurar o git
 
+## Multiple Accounts
+
+https://gist.github.com/rahularity/86da20fe3858e6b311de068201d279e3
+
+Cenário:
+usuário anton-user-01 com email anton.vlassov@email01.com.br no repositório repo01
+usuário anton-user-02 com email anton.vlassov@email02.com.br no repositório repo02
+
+Gerar as chaves
+
+```
+cd ~/.ssh
+
+ssh-keygen -t rsa -b 4096 -C "anton.vlassov@email01.com.br" -f "github-antonconta01"
+ssh-keygen -t rsa -b 4096 -C "anton.vlassov@email02.com.br" -f "github-antonconta02"
+
+ssh-add -k github-antonconta01
+ssh-add -k github-antonconta02
+```
+
+Adicionar cada chave ao repositório github, em Navegar em Profile => Settings => SSH and GPG Keys => SSH Keys => Add New
+
+Criar um arquivo de alias de hosts dentro do ~/.ssh:
+
+```
+# personal github
+Host github-antonconta01
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/github-antonconta01
+
+# work github
+Host github-antonconta02
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/github-antonconta02
+```
+
+Remover config globais de email e name
+
+```
+git config --unset --global user.email
+git config --unset --global user.name
+```
+
+Dentro do repositorio "repo01.git":
+```
+git config --local user.name "anton-user-01"
+git config --local user.email "anton.vlassov@email01.com.br"
+git remote add origin git@github-antonconta01:repo01/repo01.git
+```
+
+
+Dentro do repositório "repo02.git":
+```
+git config --local user.name "anton-user-02"
+git config --local user.email "anton.vlassov@email02.com.br"
+git remote add origin git@github-antonconta02:repo02/repo02.git
+```
+
+
+
 ## Global Confs
 
 ```
