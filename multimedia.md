@@ -8,7 +8,6 @@ sudo apt install openshot
 
 ```
 
-
 # Studio
 
 ## Hydrogen Drum Machine
